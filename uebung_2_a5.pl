@@ -32,9 +32,9 @@ elternteil(X,Y) :- vater(X,Y).
 elternteil(X,Y) :- mutter(X,Y).
 
 % sohn(X,Y) : X ist Sohn von Y.
-sohn(X,Y) :- vater(Y,X).
-sohn(X,Y) :- mutter(Y,X).
+sohn(X,Y) :- vater(Y,X), maennlich(X).
+sohn(X,Y) :- mutter(Y,X), maennlich(X).
 
 % tochter(X,Y) : X ist Tochter von Y.
-tochter(X,Y) :- vater(Y,X).
-tochter(X,Y) :- mutter(Y,X).
+tochter(X,Y) :- vater(Y,X), weiblich(X).
+tochter(X,Y) :- mutter(Y,X), weiblich(X).
