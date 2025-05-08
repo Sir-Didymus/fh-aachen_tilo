@@ -1,5 +1,7 @@
 % Lade notwendige Prädikate
-consult("../../praedikate/append.pl").
+:- prolog_load_context(directory, Dir),
+   directory_file_path(Dir, '../../praedikate/append.pl', AppendPath),
+   ensure_loaded(AppendPath).
 
 % linListe(Xs) : Xs ist gültige Liste.
 linListe(nil). % Leere Liste ist gültig.
@@ -19,14 +21,4 @@ attach(Xs,X,Ys) :- linListe(Xs), linListe(Ys), app(Xs,list(X,nil),Ys).
 
 % rev(Xs,Ys) : Ys ist das gespiegelte Xs. 
 rev(nil,nil).
-
-
-
-
-
-% Implementierung OHNE app
-
-% infix(Xs,Ys) : Ys enthält die Liste Xs
-% infix(Xs,Xs) :- linListe(Xs). % Jeere Liste enthält sich selbst.
-% infix(list(X,Xs),list(X,Ys)) :- lineListe(Xs), linListe(Ys), infix(Xs,Ys). % Beginn am Anfang von Ys.
-% infix(Xs,list(Y,Ys)) :- linListe(Xs), linListe(Ys), infix(Xs,Ys). % Beginn irgendwo in Ys.
+rev(list(X,Xs),Ys) :- rev(Xs,Hs), app(Hs,list(X,nil),Ys).
