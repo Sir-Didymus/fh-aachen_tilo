@@ -1,3 +1,4 @@
+
 % Lade notwendige Prädikate
 :- prolog_load_context(directory, Dir),
    directory_file_path(Dir, '../../praedikate/append.pl', AppendPath),
