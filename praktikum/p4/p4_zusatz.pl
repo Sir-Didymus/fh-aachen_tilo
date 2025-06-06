@@ -1,32 +1,33 @@
+
 % ==============================
-% AUFGABE A)
-%
-% NEA End010 aus Skript Seite 90
+%  Zusatzaufgabe
 % ==============================
 
 % zustand(X) : X ist Zustand des NEA.
-zustand(z0).
-zustand(z1).
-zustand(z2).
-zustand(z3).
+zustand(state_S).
+zustand(state_A).
+zustand(state_B).
+zustand(state_C).
 
 % sigma(A) : A ist Teil des Alphabets Sigma.
-sigma(0).
-sigma(1).
+sigma(a).
+sigma(b).
 
 % Transitionsrelatiion
 % delta(Zakt,A,Zneu) : Von Zakt gelangt man mit Eingabe A zu Zneu.
-delta(z0,0,z0).
-delta(z0,0,z1).
-delta(z0,1,z0).
-delta(z1,1,z2).
-delta(z2,0,z3).
+delta(state_S,a,state_A).
+delta(state_S,a,state_S).
+delta(state_S,b,state_S).
+delta(state_A,b,state_B).
+delta(state_B,b,state_B).
+delta(state_B,a,state_C).
+delta(state_C,b,state_C).
 
 % start(X) : X ist EIN Startzustand des NEA.
-start(z0).
+start(state_S).
 
 % end(X) : X ist EIN Endzustand des NEA.
-end(z3).
+end(state_C).
 
 % ==============================
 % AUFGABE B)
@@ -58,7 +59,7 @@ delta_stern(Sakt,[A|Wrs],Sneu) :- delta_stern(Sh,Wrs,Sneu), delta(Sakt,A,Sh).
 % =====
 
 % 1vonN(Ws) :- Das Wort Ws ist in der Sprache, die von NEA erzeugt wird, enthalten.
-lVonN(Ws) :-
+einsVonN(Ws) :-
              start(Start),
              end(End), % end(End) muss ans Ende kommen, damit beliebige Endzustände erreicht werden können.
              delta_stern(Start,Ws,End),
